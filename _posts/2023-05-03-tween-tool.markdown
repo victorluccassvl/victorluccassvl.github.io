@@ -24,7 +24,7 @@ I decided the list of requisites i wanted for my tween tool:
 
 * The Tween object will update together with an Monobehaviour object that is set as its owner, running this update in a Unity Coroutine.
 
-> Long story short, a Monobehaviour declares a tween object, this tween object receives an owner (usually this owner is the declaring MB itself, but thats not a rule!) and when this tween is set to run, it runs inside a Coroutine from the "owner", hence the name.
+> Long story short, a Monobehaviour declares a tween object, this tween object receives an owner (usually this owner is the declaring MB itself, but thats not a rule!) and when this tween is set to run, it runs inside a Coroutine from the "owner", hence the name. Do note that if you wanted each tool to be a Monobehaviour instead of a simple C# class, you can just wrap it inside one.
 
 * The Tween object runs for a specified duration, and allows for a delayed start.
 
@@ -83,6 +83,8 @@ Before presenting details of the implementation and the reasoning behing each re
 ---
 
 ## Implementation
+The full implementation example can be found [here](https://github.com/victorluccassvl/TweenTool)
+
 As shown in the following UML, the four main definitions used while implementing the tween are:
  -  **ITween**:  interface that defines most generic base methods
  - **Tween<T,U>**: abstract class that implements ITween and adds custom interpolation curves and a very important abstract method, Evaluate, that is the one responsible for calculating the current value U for the property of the same type exposed by T. This method calculates the value for U considering the current tween progress that ranges from 0 to 1 (before being modified by the custom curve) and the initial and target U values set when constructing the class (or initialized via serialized unity properties). Do note that T must have an exposable and interpolable field U.
